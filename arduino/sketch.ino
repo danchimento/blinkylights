@@ -1,28 +1,22 @@
 int pins[6] = {LOW, LOW, LOW, LOW, LOW, LOW};
-String inputs[10];
-int index;
 
 void setup()
 {
     Serial.begin(9600);
 
-    index = 0;
-
     pinMode(2, OUTPUT);
-    pinMode(3, OUTPUT);
     pinMode(4, OUTPUT);
-    pinMode(5, OUTPUT);
     pinMode(6, OUTPUT);
-    pinMode(7, OUTPUT);
-    pinMode(13, OUTPUT);
-    digitalWrite(13, LOW);
+    pinMode(8, OUTPUT);
+    pinMode(10, OUTPUT);
+    pinMode(12, OUTPUT);
 }
 
 void loop()
 {
-    for (int i = 2; i <= 7; i++)
+    for (int i = 1; i < 7; i++)
     {
-        digitalWrite(i, pins[i - 2]);
+        digitalWrite(i * 2, pins[i - 1]);
     }
 
     if (Serial.available())
@@ -30,8 +24,6 @@ void loop()
         String input = Serial.readString();
 
         Serial.print(input + "\n");
-
-        inputs[index] = input;
 
         int start = input.indexOf("[[") + 2;
         int end = input.indexOf("]]");
