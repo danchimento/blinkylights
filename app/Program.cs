@@ -16,16 +16,43 @@ using (StreamReader r = new StreamReader("blinkconfig.json"))
     config = JsonConvert.DeserializeObject<Config>(json);
 }
 
+SerialPort port = new SerialPort();
 var ports = SerialPort.GetPortNames();
-Console.WriteLine("Select a port:");
+Console.WriteLine("\n\n======= BLINKY LIGHTS ========");
+Console.WriteLine("\n\nSearching for blinky lights box...");
 for (var i = 0; i < ports.Length; i++)
 {
-    Console.WriteLine($"{i}: {ports[i]}");
+    Console.WriteLine($"Attempting to find blinky lights on port {ports[i]}");
+
+    var possiblePort = new SerialPort(ports[i]);
+    try {
+        possiblePort.Open();
+        Thread.Sleep(2000);
+        possiblePort.Write("BLINKY");
+        possiblePort.ReadTimeout = 3000;
+        var response = possiblePort.ReadLine();
+        if (response == "LIGHTS")
+        {
+            Console.WriteLine($"Found blinky lights on port {ports[i]}");
+            port = possiblePort;
+            break;
+        } 
+        else 
+        {
+            Console.WriteLine($"Port {ports[i]} isn't blinky lights");
+        }
+    } 
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error: {e.Message}");
+        continue;
+    } 
+    finally
+    {
+        possiblePort.Close();
+    }
 }
 
-var portNumber = int.Parse(Console.ReadLine());
-var portName = ports[portNumber];
-var port = new SerialPort(portName);
 var authClient = new HttpClient();
 var healthClient = new HttpClient();
 

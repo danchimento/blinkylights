@@ -23,7 +23,15 @@ void loop()
     {
         String input = Serial.readString();
 
-        Serial.print(input + "\n");
+        if (input.indexOf("BLINKY") > -1) 
+        {
+            pins[0] = HIGH;
+            Serial.print("LIGHTS\n");
+        }
+        else
+        {
+            Serial.print("Received: " + input + "\n");
+        }
 
         int start = input.indexOf("[[") + 2;
         int end = input.indexOf("]]");
