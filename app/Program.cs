@@ -23,12 +23,14 @@ var portNumber = int.Parse(Console.ReadLine());
 var portName = ports[portNumber];
 var port = new SerialPort(portName);
 
-port.Open();
 
 try
 {
+    port.Open();
+
     while (true)
     {
+        Thread.Sleep(5000);
         List<Result> items;
 
         using (StreamReader r = new StreamReader("app/file.json"))
@@ -43,9 +45,16 @@ try
             var val = item.Value == "ON" ? 1 : 0;
             var write = $"[[{pin},{val}]]";
             
-            port.WriteLine(write);
-            Thread.Sleep(2000);
+            Console.WriteLine($"To Arduino: {write}");
+            port.Write(write);
+            
+            var read = port.ReadLine();
+            Console.WriteLine($"From Arduino: {read}");
         }
+
+        // Thread.Sleep(500);
+        // port.Close();
+        // Thread.Sleep(500);
     }
 }
 finally

@@ -38,6 +38,8 @@
             "filterStderr": true,
             "args": []
         },
+        
+        
         {
             "name": "App",
             "type": "coreclr",

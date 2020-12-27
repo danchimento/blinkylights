@@ -1,8 +1,12 @@
-int pins[6] = {LOW, LOW, LOW, LOW, LOW, LOW };
+int pins[6] = {LOW, LOW, LOW, LOW, LOW, LOW};
+String inputs[10];
+int index;
 
 void setup()
 {
     Serial.begin(9600);
+
+    index = 0;
 
     pinMode(2, OUTPUT);
     pinMode(3, OUTPUT);
@@ -21,15 +25,19 @@ void loop()
         digitalWrite(i, pins[i - 2]);
     }
 
-    while (Serial.available() > 0)
+    if (Serial.available())
     {
         String input = Serial.readString();
+
+        Serial.print(input + "\n");
+
+        inputs[index] = input;
 
         int start = input.indexOf("[[") + 2;
         int end = input.indexOf("]]");
 
         if (start < 0 || end < start) {
-            continue;
+            return;
         }
 
         String pinString = input.substring(start, end);
@@ -37,6 +45,5 @@ void loop()
         int pinValue = pinString.substring(2, 3).toInt();
 
         pins[pinNumber - 1] = pinValue;
-        break;
     }
 }
