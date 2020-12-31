@@ -94,7 +94,6 @@ void loop()
 
         if (input.indexOf("BLINKY") > -1) 
         {
-            pins[0] = HIGH;
             Serial.print("LIGHTS\n");
         }
         else
