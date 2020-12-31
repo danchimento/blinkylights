@@ -20,14 +20,14 @@ For security reasons, Blinky Lights is configured for the readiness environment 
 
 # Customization
 
-By default, the pins are mapped as follows:
+By default, the lights are mapped as follows:
 
-PIN 1: CardProcessor.FIS_North
-PIN 2: CardProcessor.FIS_South
-PIN 3: OnDemand.Cambridge
-PIN 4: OnDemand.WUBS
-PIN 5: OnDemand.MoneyGram
-PIN 6: OnDemand.Transfast
+- Light 1: CardProcessor.FIS_North
+- Light 2: CardProcessor.FIS_South
+- Light 3: OnDemand.Cambridge
+- Light 4: OnDemand.WUBS
+- Light 5: OnDemand.MoneyGram
+- Light 6: OnDemand.Transfast
 
 This mapping can be changed by modifying the mapping values in the `blinkconfig.json` file.
 
