@@ -1,6 +1,6 @@
 # Blinky Lights
 
-Blink Lights is an Arduino/.NET project. Software runs on the host PC that checks hits the Brightwell /health endpoint. Lights on the Blinky Lights box are turned on for any systems that are unavailable. 
+Blink Lights is an Arduino/.NET project. Software runs on the host PC that hits the Brightwell /health endpoint. Lights on the Blinky Lights box are turned on for any systems that are unavailable. 
 
 # Installation
 1. Plug in the Blinky Lights box.
