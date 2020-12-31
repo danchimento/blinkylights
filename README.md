@@ -29,7 +29,7 @@ By default, the lights are mapped as follows:
 - Light 5: OnDemand.MoneyGram
 - Light 6: OnDemand.Transfast
 
-This mapping can be changed by modifying the mapping values in the `blinkconfig.json` file.
+This mapping can be changed by modifying the mapping values in the `blinkconfig.json` file. Values come from the /health endpoint response. Hit the endpoint yourself with postman to see what's available, or ask a developer for help.
 
 
 ```
